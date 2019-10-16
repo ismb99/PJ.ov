@@ -1,8 +1,6 @@
 var todoList = {
   todos: [],
-
   displayTodos: function () {
-    
     if (this.todos.length === 0) {
       console.log('My todos are empty');
     }
@@ -15,21 +13,16 @@ var todoList = {
         else{
           console.log('()', this.todos[i].todoText)
         }
-
       }
-
-
-
     }
   },
-
   addTodo: function (todoText) {
+    
     this.todos.push({
       todoText: todoText,
       completed: false
     });
     this.displayTodos();
-
   },
   changeTodo: function (postion, todoText) {
     this.todos[postion].todoText = todotext;
@@ -39,13 +32,12 @@ var todoList = {
     this.todos.splice(postion, 1);
     this.displayTodos();
   },
-  toogleCompleted: function (postion) {
+  toggleCompleted: function (postion) {
     var todo = this.todos[postion];
     todo.completed = !todo.completed
     this.displayTodos();
   },
-  toggleAll: function()
-  {
+  toggleAll: function() {
     var totalTodos = this.todos.length;
     var completedTodos = 0;
 
@@ -55,20 +47,27 @@ var todoList = {
         completedTodos++;
       }
     }
-    
-    // Case 1: om allt är ture, gör det false.
-    if (completedTodos === totalTodos) 
-    {
-      for (var i = 0; i < totalTodos; i++ )
-      this.todos[i].completed = false;
-    }
-    else
-    {
+    // Case 1: om allt är ture, gör allt false.
+    if (completedTodos === totalTodos) {
       for (var i = 0; i < totalTodos; i++){
-        this.todos[i].completed === true;
+        this.todos[i].completed = false;
+      }
+    }
+    // Case 2: gör allt sann
+    else{
+      for(var i = 0; i < totalTodos; i++){
+        this.todos[i].completed = true;
       }
     }
     this.displayTodos();
   }
-
 };
+var handlers = {
+  displayTodos: function(){
+    todoList.displayTodos();
+  },
+  toggleAll: function(){
+    todoList.toggleAll();
+  }
+};
+
